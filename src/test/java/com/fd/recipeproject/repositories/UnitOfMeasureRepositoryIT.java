@@ -39,4 +39,12 @@ public class UnitOfMeasureRepositoryIT {
 
         assertEquals("Cup", optionalUnit.get().getDescription());
     }
+
+    @Test
+    public void findByDescriptionDash() throws Exception {
+
+        Optional<UnitOfMeasure> optionalUnit = unitOfMeasureRepository.findByDescription("Dash");
+
+        assertEquals("Dash", optionalUnit.get().getDescription());
+    }
 }
