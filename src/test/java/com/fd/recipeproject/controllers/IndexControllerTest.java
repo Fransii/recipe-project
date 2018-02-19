@@ -1,7 +1,7 @@
 package com.fd.recipeproject.controllers;
 
 import com.fd.recipeproject.models.Recipe;
-import com.fd.recipeproject.services.RecipseService;
+import com.fd.recipeproject.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -28,7 +28,7 @@ public class IndexControllerTest {
     private IndexController indexController;
 
     @Mock
-    private RecipseService recipseService;
+    private RecipeService recipeService;
 
     @Mock
     private Model model;
@@ -37,7 +37,7 @@ public class IndexControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        indexController = new IndexController(recipseService);
+        indexController = new IndexController(recipeService);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class IndexControllerTest {
         recipe.setId(1L);
         recipes.add(recipe);
 
-        when(recipseService.getRecipes()).thenReturn(recipes);
+        when(recipeService.getRecipes()).thenReturn(recipes);
 
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
@@ -69,7 +69,7 @@ public class IndexControllerTest {
 
         //then
         assertEquals("index",viewName);
-        verify(recipseService, times(1)).getRecipes();
+        verify(recipeService, times(1)).getRecipes();
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
         Set<Recipe> setInController = argumentCaptor.getValue();
         assertEquals(2,setInController.size());
